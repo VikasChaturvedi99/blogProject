@@ -192,13 +192,13 @@
             </ul>
           </li>
           <li class="nav-item">
-            <a href="pages/gallery.html" class="nav-link">
-              <i class="nav-icon far fa-image"></i>
-              <p>
-                Gallery
-              </p>
+            <a href="{{ route('admin.blogs.index') }}" class="nav-link">
+                <i class="nav-icon far fa-image"></i>
+                <p>
+                    Blog
+                </p>
             </a>
-          </li>
+        </li>
      
        
   

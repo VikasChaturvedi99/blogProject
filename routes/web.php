@@ -5,7 +5,8 @@ use App\Http\Controllers\Admin\AuthController as AdminAuthController;
 use App\Http\Controllers\User\AuthController as UserAuthController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\User\DashboardController as UserDashboardController;
-
+use App\Http\Controllers\Admin\BlogController;
+use App\Http\Controllers\WebSiteSettingController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,9 +18,11 @@ use App\Http\Controllers\User\DashboardController as UserDashboardController;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+
+Route::get('/', [WebSiteSettingController::class, 'index'])->name('home');
+Route::get('/about', [WebSiteSettingController::class, 'about'])->name('about');
+Route::get('/contact', [WebSiteSettingController::class, 'contact'])->name('contact');
+
 
 // routes/web.php
 
@@ -31,16 +34,20 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
     Route::middleware('auth:admin')->group(function () {
         Route::get('dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
+        Route::resource('blogs', BlogController::class);
     });
 });
 
-Route::prefix('user')->name('user.')->group(function () {
-    Route::get('login', [UserAuthController::class, 'showLoginForm'])->name('login');
-    Route::post('login', [UserAuthController::class, 'login']);
-    Route::post('logout', [UserAuthController::class, 'logout'])->name('logout');
+// Route::prefix('user')->name('user.')->group(function () {
+//     Route::get('login', [UserAuthController::class, 'showLoginForm'])->name('login');
+//     Route::post('login', [UserAuthController::class, 'login']);
+//     Route::post('logout', [UserAuthController::class, 'logout'])->name('logout');
 
-    Route::middleware('auth')->group(function () {
-        Route::get('dashboard', [UserDashboardController::class, 'index'])->name('dashboard');
-    });
-});
+//     Route::middleware('auth')->group(function () {
+//         Route::get('dashboard', [UserDashboardController::class, 'index'])->name('dashboard');
+       
+
+      
+//     });
+// });
 
